@@ -9,6 +9,8 @@
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
+[![lib-custom-buttons.png](https://s26.postimg.org/4deijn5t5/lib-custom-buttons.png)](https://postimg.org/image/5sg38d6w5/)
+
 ## Requirements
 
 iOS 8+
