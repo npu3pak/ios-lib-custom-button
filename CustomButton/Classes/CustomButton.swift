@@ -42,6 +42,13 @@ import UIKit
         addTarget(self, action: #selector(configureRegularColors), for: .touchUpOutside)
         
         configureRegularColors()
+        configureDisabledColors()
+    }
+    
+    public override var isEnabled: Bool {
+        didSet {
+            configureDisabledColors()
+        }
     }
     
     @IBInspectable public var regularColor: UIColor = UIColor.darkGray {
@@ -63,6 +70,10 @@ import UIKit
     }
     
     @objc private func configureRegularColors() {
+        guard isEnabled else {
+            return
+        }
+        
         if tintImages {
             leftImageView.image = leftImage?.tintedImage(regularColor)
             rightImageView.image = rightImage?.tintedImage(regularColor)
@@ -75,6 +86,41 @@ import UIKit
         layer.borderColor = regularBorderColor?.cgColor ?? regularBackgroundColor?.cgColor
     }
     
+    @IBInspectable public var disabledColor: UIColor = UIColor.darkGray {
+        didSet {
+            configureDisabledColors()
+        }
+    }
+    
+    @IBInspectable public var disabledBackgroundColor: UIColor? = UIColor.clear {
+        didSet {
+            configureDisabledColors()
+        }
+    }
+    
+    @IBInspectable public var disabledBorderColor: UIColor? = UIColor.clear {
+        didSet {
+            configureDisabledColors()
+        }
+    }
+    
+    @objc private func configureDisabledColors() {
+        guard isEnabled == false else {
+            return
+        }
+        
+        if tintImages {
+            leftImageView.image = leftImage?.tintedImage(disabledColor)
+            rightImageView.image = rightImage?.tintedImage(disabledColor)
+        } else {
+            leftImageView.image = leftImage
+            rightImageView.image = rightImage
+        }
+        setTitleColor(disabledColor, for: UIControlState())
+        backgroundColor = disabledBackgroundColor
+        layer.borderColor = disabledBorderColor?.cgColor ?? disabledBackgroundColor?.cgColor
+    }
+    
     @IBInspectable public var pressedColor: UIColor = UIColor.lightGray
     
     @IBInspectable public var pressedBackgroundColor: UIColor? = UIColor.clear
@@ -82,6 +128,10 @@ import UIKit
     @IBInspectable public var pressedBorderColor: UIColor? = UIColor.clear
     
     @objc private func configurePressedColors() {
+        guard isEnabled else {
+            return
+        }
+        
         if tintImages {
             leftImageView.image = leftImage?.tintedImage(pressedColor)
             rightImageView.image = rightImage?.tintedImage(pressedColor)
