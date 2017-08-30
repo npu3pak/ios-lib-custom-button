@@ -1,0 +1,16 @@
+PODS:
+  - CustomButton (0.1.0)
+
+DEPENDENCIES:
+  - CustomButton (from `../`)
+
+EXTERNAL SOURCES:
+  CustomButton:
+    :path: ../
+
+SPEC CHECKSUMS:
+  CustomButton: 9ed3dbaf01fc9829778f59da9fa8943975006eaa
+
+PODFILE CHECKSUM: 85b6b42eccf49c1ebcf388c2ee7f3ef1c1c9262a
+
+COCOAPODS: 1.2.1

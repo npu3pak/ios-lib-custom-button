@@ -11,18 +11,21 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
+iOS 8+
+Swift 3+
+
 ## Installation
 
 CustomButton is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "CustomButton"
+pod "CustomButton", :git => 'https://github.com/npu3pak/ios-lib-custom-button.git' 
 ```
 
 ## Author
 
-npu3pak, safronovev@altarix.ru
+Evgeniy Safronov, evsafronov.personal@yandex.ru
 
 ## License
 
