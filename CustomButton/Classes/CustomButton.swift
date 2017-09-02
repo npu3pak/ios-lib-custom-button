@@ -38,8 +38,9 @@ import UIKit
         setNeedsUpdateConstraints()
         
         addTarget(self, action: #selector(configurePressedColors), for: .touchDown)
+        addTarget(self, action: #selector(configureRegularColors), for: .touchCancel)
         addTarget(self, action: #selector(configureRegularColors), for: .touchUpInside)
-        addTarget(self, action: #selector(configureRegularColors), for: .touchUpOutside)
+        addTarget(self, action: #selector(configureRegularColors), for: .touchDragExit)
         
         configureRegularColors()
         configureDisabledColors()
@@ -186,8 +187,6 @@ import UIKit
     
     override public func updateConstraints() {
         
-        constraints.forEach({self.removeConstraint($0)})
-        
         let leftImageWidth = NSLayoutConstraint(item: leftImageView,
                                                 attribute: .width,
                                                 relatedBy: .equal,
@@ -205,25 +204,6 @@ import UIKit
                                                  constant: imageSize)
         
         leftImageView.addConstraints([leftImageWidth, leftImageHeight])
-        
-        
-        let leftImageRight = NSLayoutConstraint(item: leftImageView,
-                                                attribute: .left,
-                                                relatedBy: .equal,
-                                                toItem: self,
-                                                attribute: .left,
-                                                multiplier: 1,
-                                                constant: imagePadding)
-        
-        let leftImageCenter = NSLayoutConstraint(item: leftImageView,
-                                                 attribute: .centerY,
-                                                 relatedBy: .equal,
-                                                 toItem: self,
-                                                 attribute: .centerY,
-                                                 multiplier: 1,
-                                                 constant: 0)
-        
-        addConstraints([leftImageRight, leftImageCenter])
         
         
         let rightImageWidth = NSLayoutConstraint(item: rightImageView,
@@ -245,6 +225,25 @@ import UIKit
         rightImageView.addConstraints([rightImageWidth, rightImageHeight])
         
         
+        let leftImageRight = NSLayoutConstraint(item: leftImageView,
+                                                attribute: .left,
+                                                relatedBy: .equal,
+                                                toItem: self,
+                                                attribute: .left,
+                                                multiplier: 1,
+                                                constant: imagePadding)
+        leftImageRight.identifier = "leftImageRight"
+        
+        let leftImageCenter = NSLayoutConstraint(item: leftImageView,
+                                                 attribute: .centerY,
+                                                 relatedBy: .equal,
+                                                 toItem: self,
+                                                 attribute: .centerY,
+                                                 multiplier: 1,
+                                                 constant: 0)
+        leftImageCenter.identifier = "leftImageCenter"
+        
+        
         let rightImageRight = NSLayoutConstraint(item: rightImageView,
                                                  attribute: .right,
                                                  relatedBy: .equal,
@@ -252,6 +251,7 @@ import UIKit
                                                  attribute: .right,
                                                  multiplier: 1,
                                                  constant: -imagePadding)
+        rightImageRight.identifier = "rightImageRight"
         
         let rightImageCenter = NSLayoutConstraint(item: rightImageView,
                                                   attribute: .centerY,
@@ -260,8 +260,18 @@ import UIKit
                                                   attribute: .centerY,
                                                   multiplier: 1,
                                                   constant: 0)
+        rightImageCenter.identifier = "rightImageCenter"
         
-        addConstraints([rightImageRight, rightImageCenter])
+        let constraintsForRemove = [leftImageRight.identifier!,
+                                    leftImageCenter.identifier!,
+                                    rightImageRight.identifier!,
+                                    rightImageCenter.identifier!]
+        
+        constraints.filter({$0.identifier != nil && constraintsForRemove.contains($0.identifier!)}).forEach() {
+            self.removeConstraint($0)
+        }
+        
+        addConstraints([leftImageRight, leftImageCenter, rightImageRight, rightImageCenter])
         
         super.updateConstraints()
     }
