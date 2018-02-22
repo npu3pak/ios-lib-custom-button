@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable public class CustomButton: UIButton {
+public class CustomButton: UIButton {
     private var leftImageView: UIImageView!
     private var rightImageView: UIImageView!
     
@@ -52,19 +52,19 @@ import UIKit
         }
     }
     
-    @IBInspectable public var regularColor: UIColor = UIColor.darkGray {
+    public var regularColor: UIColor = UIColor.darkGray {
         didSet {
             configureRegularColors()
         }
     }
     
-    @IBInspectable public var regularBackgroundColor: UIColor? = UIColor.clear {
+    public var regularBackgroundColor: UIColor? = UIColor.clear {
         didSet {
             configureRegularColors()
         }
     }
     
-    @IBInspectable public var regularBorderColor: UIColor? = UIColor.clear {
+    public var regularBorderColor: UIColor? = UIColor.clear {
         didSet {
             configureRegularColors()
         }
@@ -87,19 +87,19 @@ import UIKit
         layer.borderColor = regularBorderColor?.cgColor ?? regularBackgroundColor?.cgColor
     }
     
-    @IBInspectable public var disabledColor: UIColor = UIColor.darkGray {
+    public var disabledColor: UIColor = UIColor.darkGray {
         didSet {
             configureDisabledColors()
         }
     }
     
-    @IBInspectable public var disabledBackgroundColor: UIColor? = UIColor.clear {
+    public var disabledBackgroundColor: UIColor? = UIColor.clear {
         didSet {
             configureDisabledColors()
         }
     }
     
-    @IBInspectable public var disabledBorderColor: UIColor? = UIColor.clear {
+    public var disabledBorderColor: UIColor? = UIColor.clear {
         didSet {
             configureDisabledColors()
         }
@@ -122,11 +122,11 @@ import UIKit
         layer.borderColor = disabledBorderColor?.cgColor ?? disabledBackgroundColor?.cgColor
     }
     
-    @IBInspectable public var pressedColor: UIColor = UIColor.lightGray
+    public var pressedColor: UIColor = UIColor.lightGray
     
-    @IBInspectable public var pressedBackgroundColor: UIColor? = UIColor.clear
+    public var pressedBackgroundColor: UIColor? = UIColor.clear
     
-    @IBInspectable public var pressedBorderColor: UIColor? = UIColor.clear
+    public var pressedBorderColor: UIColor? = UIColor.clear
     
     @objc private func configurePressedColors() {
         guard isEnabled else {
@@ -145,43 +145,43 @@ import UIKit
         layer.borderColor = pressedBorderColor?.cgColor ?? pressedBackgroundColor?.cgColor
     }
     
-    @IBInspectable public var borderWidth: CGFloat {
+    public var borderWidth: CGFloat {
         set { layer.borderWidth = newValue }
         get { return layer.borderWidth }
     }
     
-    @IBInspectable public var cornerRadius: CGFloat {
+    public var cornerRadius: CGFloat {
         set { layer.cornerRadius = newValue }
         get { return layer.cornerRadius  }
     }
     
-    @IBInspectable public var imageSize: CGFloat = 16 {
+    public var imageSize: CGFloat = 16 {
         didSet {
             setNeedsUpdateConstraints()
         }
     }
     
-    @IBInspectable public var imagePadding: CGFloat = 16 {
+    public var imagePadding: CGFloat = 16 {
         didSet {
             setNeedsUpdateConstraints()
         }
     }
     
-    @IBInspectable public var leftImage: UIImage? {
+    public var leftImage: UIImage? {
         didSet {
             configureRegularColors()
             configureDisabledColors()
         }
     }
     
-    @IBInspectable public var rightImage: UIImage? {
+    public var rightImage: UIImage? {
         didSet {
             configureRegularColors()
             configureDisabledColors()
         }
     }
     
-    @IBInspectable public var tintImages: Bool = true {
+    public var tintImages: Bool = true {
         didSet {
             configureRegularColors()
         }
