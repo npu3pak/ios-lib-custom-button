@@ -169,13 +169,15 @@ import UIKit
     
     @IBInspectable public var leftImage: UIImage? {
         didSet {
-            leftImageView.image = leftImage?.tintedImage(tintColor)
+            configureRegularColors()
+            configureDisabledColors()
         }
     }
     
     @IBInspectable public var rightImage: UIImage? {
         didSet {
-            rightImageView.image = rightImage?.tintedImage(tintColor)
+            configureRegularColors()
+            configureDisabledColors()
         }
     }
     
